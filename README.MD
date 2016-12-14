@@ -7,7 +7,6 @@
 + https://github.com/steven5538/vue-button
 + https://yarnpkg.com/en/docs/install
 
-
 ## props:
 | name | type | value | description |
 | :----| :----| :----| :----|
@@ -15,6 +14,7 @@
 
 
 ## usage:
++ Need 'FastClick' support.
 ```html
 <react-numer-spinner :visible="true" />
 ```
