@@ -1,6 +1,7 @@
 import './style.scss';
 import classNames from 'classnames';
 import toThousands from 'to-thousands';
+import noop from 'noop';
 
 export default class extends React.Component{
   static propTypes = {
@@ -12,6 +13,7 @@ export default class extends React.Component{
     readOnly:React.PropTypes.bool,
     disabled:React.PropTypes.bool,
     onInputClick:React.PropTypes.func,
+    onChange:React.PropTypes.func,
     pulsText:React.PropTypes.string,
     minusText:React.PropTypes.string,
     size:React.PropTypes.string,
@@ -28,6 +30,8 @@ export default class extends React.Component{
     readOnly:false,
     disabled:false,
     showThousand:false,
+    onInputClick:noop,
+    onChange:noop,
     pulsText:'+',
     minusText:'-',
     size:'18px',
@@ -51,27 +55,24 @@ export default class extends React.Component{
 
   _inputChange(ev){
     var value = ev.target.value ;
-    console.log(value);
-    value = this.checkValue(value);
-    this.setState({
-      value:value
-    })
+    this.change(value);
+    this.change(value,'input');
   }
 
   plus(){
     var value = parseFloat(this.state.value) + this.props.step;
-    value = this.checkValue(value);
-    this.setState({
-      value:value
-    })
+    this.change(value,'plus');
   }
 
   minus(){
     var value = parseFloat(this.state.value) - this.props.step;
-    value = this.checkValue(value);
-    this.setState({
-      value:value
-    })
+    this.change(value,'minus');
+  }
+
+  change(inValue,inAction){
+    var value = this.checkValue(inValue);
+    this.setState({ value });
+    this.props.onChange({ value, action:inAction });
   }
 
   checkValue(inValue){
