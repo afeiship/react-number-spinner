@@ -8,7 +8,11 @@ class App extends React.Component{
       <div className="hello-react-number-spinner">
         <ReactNumberSpinner onInputClick={()=>{
             console.log('number click');
-          }} min={10000} max={1000000} readOnly={true} step={5000} value="10000" />
+          }} min={10000} max={1000000} precision={0} readOnly={true} step={5000} value="10000" />
+
+          <ReactNumberSpinner onInputClick={()=>{
+              console.log('number click');
+            }} min={10000} max={1000000} showThousand={true} readOnly={true} step={5000} value="10000" />
     </div>
     );
   }

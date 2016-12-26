@@ -8,6 +8,7 @@ export default class extends React.Component{
     min:React.PropTypes.number,
     max:React.PropTypes.number,
     step:React.PropTypes.number,
+    precision:React.PropTypes.number,
     readOnly:React.PropTypes.bool,
     disabled:React.PropTypes.bool,
     onInputClick:React.PropTypes.func,
@@ -16,19 +17,22 @@ export default class extends React.Component{
     size:React.PropTypes.string,
     width:React.PropTypes.string,
     value:React.PropTypes.string,
+    showThousand:React.PropTypes.bool
   };
 
   static defaultProps = {
     min:0,
     max:100,
     step:10,
+    precision:2,
     readOnly:false,
     disabled:false,
+    showThousand:true,
     pulsText:'+',
     minusText:'-',
     size:'18px',
     width:'100%',
-    value:'0'
+    value:'0.00'
   };
 
   constructor(props){
@@ -83,7 +87,11 @@ export default class extends React.Component{
   }
 
   processValue(inValue){
-    return toThousands(parseFloat(inValue).toFixed(2));
+    var precisionValue = parseFloat(inValue).toFixed(this.props.precision);
+    if(this.props.showThousand){
+      return toThousands(precisionValue);
+    }
+    return precisionValue;
   }
 
   render(){
