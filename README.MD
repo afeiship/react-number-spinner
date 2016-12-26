@@ -1,4 +1,4 @@
-#react-numer-spinner
+#react-number-spinner
 > Number spinner component for react.
 
 
@@ -17,5 +17,5 @@
 + Need 'FastClick' support.
 + http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js
 ```html
-<react-numer-spinner :visible="true" />
+<ReactNumberSpinner :visible="true" />
 ```

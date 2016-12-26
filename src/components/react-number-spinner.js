@@ -1,9 +1,16 @@
 import './style.scss';
 import classNames from 'classnames';
+import toThousands from 'to-thousands';
 
 export default class extends React.Component{
   static propTypes = {
     cssClass:React.PropTypes.string,
+    min:React.PropTypes.number,
+    max:React.PropTypes.number,
+    step:React.PropTypes.number,
+    readOnly:React.PropTypes.bool,
+    disabled:React.PropTypes.bool,
+    onInputClick:React.PropTypes.func,
     pulsText:React.PropTypes.string,
     minusText:React.PropTypes.string,
     size:React.PropTypes.string,
@@ -16,6 +23,7 @@ export default class extends React.Component{
     max:100,
     step:10,
     readOnly:false,
+    disabled:false,
     pulsText:'+',
     minusText:'-',
     size:'18px',
@@ -26,7 +34,9 @@ export default class extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      value:props.value
+      value:props.value,
+      readOnly:props.readOnly,
+      disabled:props.disabled,
     };
   }
 
@@ -37,6 +47,7 @@ export default class extends React.Component{
 
   _inputChange(ev){
     var value = ev.target.value ;
+    console.log(value);
     value = this.checkValue(value);
     this.setState({
       value:value
@@ -44,14 +55,16 @@ export default class extends React.Component{
   }
 
   plus(){
-    var value = parseInt(this.state.value) + this.props.step;
+    var value = parseFloat(this.state.value) + this.props.step;
+    value = this.checkValue(value);
     this.setState({
       value:value
     })
   }
 
   minus(){
-    var value = parseInt(this.state.value) - this.props.step;
+    var value = parseFloat(this.state.value) - this.props.step;
+    value = this.checkValue(value);
     this.setState({
       value:value
     })
@@ -69,6 +82,10 @@ export default class extends React.Component{
     return inValue;
   }
 
+  processValue(inValue){
+    return toThousands(parseFloat(inValue).toFixed(2));
+  }
+
   render(){
     return (
       <div
@@ -76,18 +93,22 @@ export default class extends React.Component{
           width:this.props.width,
           fontSize:this.props.size
         }}
-        className={classNames('react-numer-spinner',this.props.cssClass)}>
+        className={classNames('react-number-spinner',this.props.cssClass)}>
         <button
-          disabled={this.state.value === this.props.max}
+          disabled={this.state.value == this.props.max}
           className="plus" onClick={this._click.bind(this,'plus')}>
           <span>{this.props.pulsText}</span>
         </button>
         <button
-          disabled={this.state.value === this.props.min}
+          disabled={this.state.value == this.props.min}
           className="minus" onClick={this._click.bind(this,'minus')}>
           <span>{this.props.minusText}</span>
         </button>
-        <input className="input" pattern='[0-9]*' value={this.state.value} onChange={this._inputChange.bind(this)} />
+        <input className="input" pattern='[0-9]*'
+          readOnly={this.state.readOnly}
+          disabled={this.state.disabled}
+          onClick={this.props.onInputClick}
+          value={this.processValue(this.state.value)} onChange={this._inputChange.bind(this)} />
       </div>
     );
   }

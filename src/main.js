@@ -1,2 +1,2 @@
-import ReactNumerSpinner from 'components/react-numer-spinner';
-export default ReactNumerSpinner;
+import ReactNumberSpinner from 'components/react-number-spinner';
+export default ReactNumberSpinner;
