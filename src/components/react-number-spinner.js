@@ -27,7 +27,7 @@ export default class extends React.Component{
     precision:2,
     readOnly:false,
     disabled:false,
-    showThousand:true,
+    showThousand:false,
     pulsText:'+',
     minusText:'-',
     size:'18px',
