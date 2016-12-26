@@ -77,6 +77,10 @@ export default class extends React.Component{
     this.props.onChange({ value, action:inAction });
   }
 
+  componentWillReceiveProps(nextProps){
+    this.setState(nextProps);
+  }
+
   checkValue(inValue){
     var max = this.props.max;
     var min = this.props.min;
