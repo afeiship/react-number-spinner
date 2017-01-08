@@ -73,8 +73,9 @@ export default class extends React.Component{
 
   change(inValue,inAction){
     var value = this.checkValue(inValue);
-    this.setState({ value });
-    this.props.onChange({ value, action:inAction });
+    this.setState({ value },()=>{
+        this.props.onChange({ value, action:inAction });
+    });
   }
 
   componentWillReceiveProps(nextProps){
