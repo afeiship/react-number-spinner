@@ -72,7 +72,7 @@ export default class extends React.Component{
   }
 
   change(inValue,inAction){
-    var value = this.checkValue(inValue,inAction);
+    var value = this.checkValue(inValue);
     this.setState({ value },()=>{
         this.props.onChange({ value, action:inAction });
     });
@@ -82,18 +82,16 @@ export default class extends React.Component{
     this.setState(nextProps);
   }
 
-  checkValue(inValue,inAction){
+  checkValue(inValue){
     var max = this.props.max;
     var min = this.props.min;
-
-    switch(inAction){
-      case 'plus':
-        return Math.max(max,inValue);
-      case 'minus':
-        return Math.min(inValue,min);
-      default:
-        return inValue;
+    if(inValue>max){
+      return max;
     }
+    if(inValue<min){
+      return min;
+    }
+    return inValue;
   }
 
   processValue(inValue){
