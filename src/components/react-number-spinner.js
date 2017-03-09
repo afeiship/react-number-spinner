@@ -62,17 +62,64 @@ export default class extends React.Component{
   }
 
   plus(){
-    var value = parseFloat(this.state.value) + this.props.step;
+    var oldValue = parseFloat(this.state.value);
+    var value = oldValue + this.props.step;
+    var min = this.props.min;
+    var max = this.props.max;
+    switch(true){
+      case oldValue<min:
+        value = Math.max(min,value);
+      break;
+      case oldValue>=min && oldValue<=max:
+        if(value>max){
+          value = max;
+        }
+      break;
+      case oldValue>max:
+        value = oldValue;
+      break;
+    }
+
     this.change(value,'plus');
   }
 
   minus(){
-    var value = parseFloat(this.state.value) - this.props.step;
+    var oldValue = parseFloat(this.state.value);
+    var value = oldValue - this.props.step;
+    var min = this.props.min;
+    var max = this.props.max;
+
+    switch(true){
+      case oldValue<min:
+        value = oldValue;
+      break;
+      case oldValue>=min && oldValue<=max:
+        if (value < min) {
+          value = min;
+        }
+      break;
+      case oldValue>max:
+        value = max;
+      break;
+    }
+
+    // if(oldValue<max){
+    //   if (oldValue < min) {
+    //     value = oldValue;
+    //   } else {
+    //     if (value < min) {
+    //       value = min;
+    //     }
+    //   }
+    // }else{
+    //   value = Math.min(max,value);
+    // }
+
     this.change(value,'minus');
   }
 
   change(inValue,inAction){
-    var value = this.checkValue(inValue);
+    var value = inValue;
     this.setState({ value },()=>{
         this.props.onChange({ value, action:inAction });
     });
@@ -80,18 +127,6 @@ export default class extends React.Component{
 
   componentWillReceiveProps(nextProps){
     this.setState(nextProps);
-  }
-
-  checkValue(inValue){
-    var max = this.props.max;
-    var min = this.props.min;
-    if(inValue>max){
-      return max;
-    }
-    if(inValue<min){
-      return min;
-    }
-    return inValue;
   }
 
   processValue(inValue){
@@ -111,12 +146,12 @@ export default class extends React.Component{
         }}
         className={classNames('react-number-spinner',this.props.cssClass)}>
         <button
-          disabled={this.state.value == this.props.max}
+          disabled={this.state.value >= this.props.max}
           className="plus" onClick={this._click.bind(this,'plus')}>
           <span>{this.props.pulsText}</span>
         </button>
         <button
-          disabled={this.state.value == this.props.min}
+          disabled={this.state.value <= this.props.min}
           className="minus" onClick={this._click.bind(this,'minus')}>
           <span>{this.props.minusText}</span>
         </button>
