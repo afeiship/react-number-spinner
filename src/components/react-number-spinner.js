@@ -1,7 +1,8 @@
 import './style.scss';
+
 import classNames from 'classnames';
-import toThousands from 'to-thousands';
 import noop from 'noop';
+import toThousands from 'to-thousands';
 
 export default class extends React.Component{
   static propTypes = {
@@ -19,7 +20,6 @@ export default class extends React.Component{
     minusText:React.PropTypes.string,
     size:React.PropTypes.string,
     width:React.PropTypes.string,
-    value:React.PropTypes.string,
     showThousand:React.PropTypes.bool
   };
 
@@ -28,7 +28,6 @@ export default class extends React.Component{
     max:100,
     step:10,
     precision:2,
-    value:'',
     readOnly:false,
     disabled:false,
     showThousand:false,
