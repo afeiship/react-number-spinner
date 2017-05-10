@@ -6,7 +6,7 @@ import toThousands from 'to-thousands';
 
 export default class extends React.Component{
   static propTypes = {
-    cssClass:React.PropTypes.string,
+    className:React.PropTypes.string,
     min:React.PropTypes.number,
     max:React.PropTypes.number,
     step:React.PropTypes.number,
@@ -143,7 +143,7 @@ export default class extends React.Component{
           width:this.props.width,
           fontSize:this.props.size
         }}
-        className={classNames('react-number-spinner',this.props.cssClass)}>
+        className={classNames('react-number-spinner',this.props.className)}>
         <button
           disabled={this.state.value >= this.props.max}
           className="plus" onClick={this._click.bind(this,'plus')}>
