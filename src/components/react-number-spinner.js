@@ -1,26 +1,27 @@
 import './style.scss';
 
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import noop from 'noop';
 import toThousands from 'to-thousands';
 
-export default class extends React.Component{
+export default class extends React.PureComponent{
   static propTypes = {
-    className:React.PropTypes.string,
-    min:React.PropTypes.number,
-    max:React.PropTypes.number,
-    step:React.PropTypes.number,
-    value:React.PropTypes.string,
-    precision:React.PropTypes.number,
-    readOnly:React.PropTypes.bool,
-    disabled:React.PropTypes.bool,
-    onInputClick:React.PropTypes.func,
-    onChange:React.PropTypes.func,
-    pulsText:React.PropTypes.string,
-    minusText:React.PropTypes.string,
-    size:React.PropTypes.string,
-    width:React.PropTypes.string,
-    showThousand:React.PropTypes.bool
+    className:PropTypes.string,
+    min:PropTypes.number,
+    max:PropTypes.number,
+    step:PropTypes.number,
+    value:PropTypes.string,
+    precision:PropTypes.number,
+    readOnly:PropTypes.bool,
+    disabled:PropTypes.bool,
+    onInputClick:PropTypes.func,
+    onChange:PropTypes.func,
+    pulsText:PropTypes.string,
+    minusText:PropTypes.string,
+    size:PropTypes.string,
+    width:PropTypes.string,
+    showThousand:PropTypes.bool
   };
 
   static defaultProps = {
