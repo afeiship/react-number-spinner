@@ -13,6 +13,7 @@ var externals = process.env.NODE_ENV === 'production' ? {
   react: 'react',
   classnames: 'classnames',
   'prop-types': 'prop-types',
+  'to-thousands': 'to-thousands',
   'react-dom': 'react-dom'
 } : {};
 
