@@ -15,7 +15,7 @@ static propTypes = {
   disabled:React.PropTypes.bool,
   onInputClick:React.PropTypes.func,
   onChange:React.PropTypes.func,
-  pulsText:React.PropTypes.string,
+  plusText:React.PropTypes.string,
   minusText:React.PropTypes.string,
   size:React.PropTypes.string,
   width:React.PropTypes.string,
